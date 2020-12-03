@@ -26,3 +26,4 @@ plt.scatter(group2[:,0], group2[:,1], color='r', label='B')
 plt.savefig("./img/hoge.png")
 plt.show()
 
+#edit from Ubuntu
