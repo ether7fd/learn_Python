@@ -46,26 +46,21 @@ dpB = DENSITY_PROPA(average[1][0], variance[1][0], group1[:, [1]])
 
 normal_2val = NORMALDIST_2VAL(average[0][0], average[1][0], variance[0][0], variance[1][0], COEFFICIENT(group1), group1[:, [0]], group1[:, [1]])
 
-#plt.scatter(xA, dpA, color='b', label='A')
-#plt.scatter(xB, dpB, color='r', label='B')
-#plt.savefig("learn_Python/pythonProject1/img/density_propability.png")
-#plt.show()
+x = np.arange(0, 1.0, 0.01)
+y = np.arange(0, 1.0, 0.01)
 
-X = np.arange(0, 1.0, 0.01)
-Y = np.arange(0, 1.0, 0.01)
+xx, yy = np.meshgrid(x, y)
 
-#Z = NORMALDIST_2VAL(average[0][0], average[1][0], variance[0][0], variance[1][0], COEFFICIENT(group1), X, Y)
-Z = func1(X, Y)
+z = NORMALDIST_2VAL(average[0][0], average[1][0], variance[0][0], variance[1][0], COEFFICIENT(group1), xx, yy)
 
-print(X,Y,Z)
+#z = func1(xx, yy)
 
 fig = plt.figure()
 ax = Axes3D(fig)
+# ax.plot_wireframe(xx, yy, z)
+ax.plot(xx, yy, z)
 
-ax.set_xlabel("x")
-ax.set_ylabel("y")
-ax.set_zlabel("z")
-
-ax.plot(X, Y, Z, marker="o", linestyle='None')
-plt.savefig("learn_Python/pythonProject1/img/3Dplot_test.png")
+# plt.contourf(xx, yy, z)
+# plt.savefig("learn_Python/pythonProject1/img/normal2val_3d.png")
+# plt.savefig("learn_Python/pythonProject1/img/normal2val_eq.png")
 plt.show()
