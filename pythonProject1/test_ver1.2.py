@@ -3,7 +3,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import math
 
-kensa_A = np.loadtxt('./2val_A.csv', delimiter=',', dtype='float')
+kensa_A = np.loadtxt("./2val_A.csv", delimiter=',', dtype='float')
 kensa_B = np.loadtxt('./2val_B.csv', delimiter=',', dtype='float')
 
 def MAHARANO(x, average, variance):

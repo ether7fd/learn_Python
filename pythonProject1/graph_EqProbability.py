@@ -4,8 +4,10 @@ from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import math
 
-kensa_A = np.loadtxt('learn_Python/pythonProject1/2val_A.csv', delimiter=',', dtype='float')
-kensa_B = np.loadtxt('learn_Python/pythonProject1/2val_B.csv', delimiter=',', dtype='float')
+# kensa_A = np.loadtxt('learn_Python/pythonProject1/2val_A.csv', delimiter=',', dtype='float')
+kensa_A = np.loadtxt('G:/Users/Ether7fd/Documents/Repositories/learn_Python/pythonProject1/2val_A.csv', delimiter=',', dtype='float')
+# kensa_B = np.loadtxt('learn_Python/pythonProject1/2val_B.csv', delimiter=',', dtype='float')
+kensa_B = np.loadtxt('G:/Users/Ether7fd/Documents/Repositories/learn_Python/pythonProject1/2val_B.csv', delimiter=',', dtype='float')
 
 def func1(x, y):
     return x**2 + y**2
