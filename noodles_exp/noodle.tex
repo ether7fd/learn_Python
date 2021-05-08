@@ -15,11 +15,11 @@
 \graphicspath{{./img/}}
 
 \newif\iffigure
-\figurefalse
-% \figuretrue
+% \figurefalse
+\figuretrue
 
 \lstset{%
-  language={C},
+  language={Python},
   basicstyle={\small},%
   identifierstyle={\small},%
   commentstyle={\small\itshape},%
@@ -140,12 +140,189 @@ CNNでは，下図のように隠れ層は「畳み込み層」と「プーリ�
 
 
 \subsection{過学習とはどのようなことを言うのか，また今回の実験で過学習が発生しているかを考察せよ}
+過学習とは，機械学習のモデルが訓練用データに最適化しすぎて，新しデータに対応できなくなることをいう．いわばモデルが訓練用データを丸暗記した状態である．つまり少しの応用問題，イレギュラーデータに対応できない状態である．これはモデルのパラメータ数に対して，訓練用データが少なすぎる場合に発生するとされている．\par
+下図は過学習が発生したと思われる学習のモデルである．この時，学習に用いたtrainingデータは110ほどであったのに対して，モデルのパラメータ数は3,321,410となっている．よってこの学習ではモデルのパラメータ数に対して学習データが少なかったために過学習が発生したと考えられる．
+\iffigure
+\begin{figure}[H]% 
+    \begin{center}
+    \includegraphics[width=0.5\textwidth]{overfit_model.png} 
+    \caption{過学習が発生した時のモデル}
+    \end{center}
+\end{figure}
+\fi
+
+下図は過学習が発生したときの学習推移のグラフである．trainingデータでの学習は正答率が増加し，損失が減少していることが分かるが，validationデータでの検証は正答率が減少し，損失が増加していることが分かる．よって，この学習はtrainingデータに最適化され，イレギュラーなデータに対応できなくなっている事が分かる．
+\iffigure
+\begin{figure}[H]
+\begin{minipage}{8cm}% 
+  \begin{center}
+   \includegraphics[width=1\textwidth]{ker_CNN_acc.png} \\
+   \caption{過学習と考えられる正答率の推移}
+  \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{8cm}%
+  \begin{center}
+    \includegraphics[width=1\textwidth]{ker_CNN_loss.png} \\
+    \caption{過学習と考えられる損失の推移}
+  \end{center}
+\end{minipage}
+\end{figure}
+\fi
 
 
 \subsection{過学習を防止するための手法について考察せよ}
+前節のような過学習を抑制するための方法として，ドロップアウト層の導入，バッチ正規化，パラメータ正則化の3つが挙げられる．
+\subsubsection{ドロップアウトの導入}
+\iffigure
+\begin{figure}[H]% 
+    \begin{center}
+    \includegraphics[width=0.5\textwidth]{dropout_model.png} 
+    \caption{ドロップアウト層を追加したモデル}
+    \end{center}
+\end{figure}
+\fi
 
+\iffigure
+\begin{figure}[H]
+\begin{minipage}{8cm}% 
+  \begin{center}
+   \includegraphics[width=1\textwidth]{dropout_acc.png} \\
+   \caption{ドロップアウトの導入による正答率の推移}
+  \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{8cm}%
+  \begin{center}
+    \includegraphics[width=1\textwidth]{dropout_loss.png} \\
+    \caption{ドロップアウトの導入による損失の推移}
+  \end{center}
+\end{minipage}
+\end{figure}
+\fi
+
+
+\subsubsection{バッチ正規化}
+\iffigure
+\begin{figure}[H]% 
+    \begin{center}
+    \includegraphics[width=0.5\textwidth]{regular_model.png} 
+    \caption{バッチ正規化のモデル}
+    \end{center}
+\end{figure}
+\fi
+
+\iffigure
+\begin{figure}[H]
+\begin{minipage}{8cm}% 
+  \begin{center}
+   \includegraphics[width=1\textwidth]{regular_acc.png} \\
+   \caption{バッチ正規化したときの正答率の推移}
+  \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{8cm}%
+  \begin{center}
+    \includegraphics[width=1\textwidth]{regular_loss.png} \\
+    \caption{バッチ正規化したときの損失の推移}
+  \end{center}
+\end{minipage}
+\end{figure}
+\fi
+
+
+\subsubsection{パラメータ正則化}
+\iffigure
+\begin{figure}[H]% 
+    \begin{center}
+    \includegraphics[width=0.5\textwidth]{param_regular_model.png} 
+    \caption{パラメータ正則化のモデル}
+    \end{center}
+\end{figure}
+\fi
+
+\iffigure
+\begin{figure}[H]
+\begin{minipage}{8cm}% 
+  \begin{center}
+   \includegraphics[width=1\textwidth]{param_regular_acc.png} \\
+   \caption{パラメータ正則化したときの正答率の推移}
+  \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{8cm}%
+  \begin{center}
+    \includegraphics[width=1\textwidth]{param_regular_loss.png} \\
+    \caption{パラメータ正則化したときの損失の推移}
+  \end{center}
+\end{minipage}
+\end{figure}
+\fi
 
 \subsection{ファインチューニングの手法について考察せよ}
+\iffigure
+\begin{figure}[H]% 
+    \begin{center}
+    \includegraphics[width=0.5\textwidth]{vgg16_model.png} 
+    \caption{VGG16モデル}
+    \end{center}
+\end{figure}
+\fi
+\iffigure
+\begin{figure}[H]% 
+    \begin{center}
+    \includegraphics[width=0.5\textwidth]{finetyu_before.png} 
+    \caption{ファインチューニングに用いたモデル}
+    \end{center}
+\end{figure}
+\fi
+
+\iffigure
+\begin{figure}[H]
+\begin{minipage}{8cm}% 
+  \begin{center}
+   \includegraphics[width=1\textwidth]{finetyu_acc.png} \\
+   \caption{重みを凍結して学習したときの正答率の推移}
+  \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{8cm}%
+  \begin{center}
+    \includegraphics[width=1\textwidth]{finetyu_loss.png} \\
+    \caption{重みを凍結して学習したときの損失の推移}
+  \end{center}
+\end{minipage}
+\end{figure}
+\fi
+
+ファインチューニングを行うために凍結したconv\_layersのblock5の層の凍結を解除．Trainable paramsの値が増えていることが分かる．
+\iffigure
+\begin{figure}[H]% 
+    \begin{center}
+    \includegraphics[width=0.5\textwidth]{finetyu_after.png} 
+    \caption{ファインチューニングに用いた学習モデル}
+    \end{center}
+\end{figure}
+\fi
+
+\iffigure
+\begin{figure}[H]
+\begin{minipage}{8cm}% 
+  \begin{center}
+   \includegraphics[width=1\textwidth]{finetyu_after_acc.png} \\
+   \caption{凍結解除して学習したときの正答率の推移}
+  \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{8cm}%
+  \begin{center}
+    \includegraphics[width=1\textwidth]{finetyu_after_loss.png} \\
+    \caption{凍結解除して学習したときの損失の推移}
+  \end{center}
+\end{minipage}
+\end{figure}
+\fi
+
 
 
 \section{参考文献}
